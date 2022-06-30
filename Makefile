@@ -19,7 +19,7 @@ build: $(INC) $(MAIN)
 run:
 	build/main
 
-example: dot_example add_example transpose_example
+examples: dot_example add_example transpose_example
 
 dot_example: $(INC) $(DOT_EXAMPLE)
 	$(COMPILER) $(INC) $(DOT_EXAMPLE) -o $(OUTDIR)/$(OUTDIR_EXAMPLES)/dot
