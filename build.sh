@@ -10,6 +10,8 @@ build_examples () {
     echo "built transpose_example"
     nvcc ./matrix/*.cu ./examples/add_example.cu -o ./build/add_example
     echo "built add_example"
+    nvcc ./matrix/*.cu ./examples/dot_example.cu -o ./build/dot_example
+    echo "built dot_example"
 }
 
 build_main () {
@@ -17,7 +19,7 @@ build_main () {
     echo "built main"
 }
 
-if [[ $1 -eq "--examples" ]] || [[ $1 -eq "-e" ]];
+if [[ $1 == "--examples" ]] || [[ $1 == "-e" ]];
 then 
     build_examples;
 fi

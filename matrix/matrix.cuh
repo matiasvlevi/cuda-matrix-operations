@@ -9,5 +9,6 @@ namespace matrix {
     
     // Utility functions
     void init(float* m, int R, int C);
-    void log(float* m, int R, int C, char name);
+    void initRandom(float* m, int R, int C);
+    void log(float* m, int R, int C, char name = 'M');
 }

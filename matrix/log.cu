@@ -6,7 +6,7 @@
 * log a  in the console
 * 
 */
-void matrix::log(float* m, int R, int C, char name = 'M') {
+void matrix::log(float* m, int R, int C, char name) {
     char delim = ',';
     std::cout << name << " [\n";
     for (int i = 0; i < R; i++) {
