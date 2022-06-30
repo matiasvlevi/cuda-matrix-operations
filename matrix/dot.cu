@@ -1,9 +1,10 @@
 #include "matrix.cuh"
 
 /**
-* Mult
+* dot
 * 
-*  dot product
+* A*B = C
+* dot product
 */
 __global__ void matrix::dot(
     float *a,
@@ -20,11 +21,11 @@ __global__ void matrix::dot(
     // Abort if out of range
     if (row >= M || col >= P) return;
 
+    // Vector dot product
     float sum = 0;
     for (int k = 0; k < P; k++) {
         sum += a[row * N + k] * b[k * P + col];
     }
-
     c[row * P + col] = sum;
 
     return;

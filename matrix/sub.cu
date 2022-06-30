@@ -1,12 +1,12 @@
 #include "matrix.cuh"
 
 /**
-* add
+* sub
 * 
-* Add 2 matrices with the same dimension
+* Subtract 2 matrices with the same dimension
 *
 */
-__global__ void matrix::add(
+__global__ void matrix::sub(
     float *a,
     float *b,
     float *c,
@@ -20,7 +20,7 @@ __global__ void matrix::add(
     // Abort if out of range
     if (row >= R || col >= C) return;
 
-    c[row * C + col] = a[row * C + col] + b[row * C + col];
+    c[row * C + col] = a[row * C + col] - b[row * C + col];
 
     return;
 }
