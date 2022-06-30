@@ -12,10 +12,12 @@ DOT_EXAMPLE=examples/dot_example.cu
 ADD_EXAMPLE=examples/add_example.cu
 TRANSPOSE_EXAMPLE=examples/transpose_example.cu
 
-[ -d $(OUTDIR)/$(OUTDIR_EXAMPLES) ] || mkdir -p $(OUTDIR)/$(OUTDIR_EXAMPLES)
-
 build: $(INC) $(MAIN)
+	mkdir -p $(OUTDIR)/$(OUTDIR_EXAMPLES)
 	$(COMPILER) $(INC) $(MAIN) -o $(OUTDIR)/main 
+
+run:
+	build/main
 
 example: dot_example add_example transpose_example
 
