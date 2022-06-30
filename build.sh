@@ -1,0 +1,1 @@
+nvcc ./main.cu ./matrix/*.cu -o ./build/main
