@@ -1,7 +1,6 @@
-# Cuda matrix OPs
+# Dannjs + CUDA
 
-Cuda matrix operations 
-
+Cuda matrix operations & Dannjs CUDA implementation
 
 ### Build
 
@@ -10,7 +9,7 @@ Cuda matrix operations
 ```
 
 #### Build examples (optional)
-
+Matrix operation examples are provided
 ```
 ./build.sh --examples
 ```
@@ -18,5 +17,5 @@ Cuda matrix operations
 ### Run
 
 ```
-./run.sh
+./build/main
 ```

@@ -6,11 +6,11 @@ build_matrix_examples () {
         mkdir -p ./build/matrix
     fi
     nvcc ./matrix/*.cu ./matrix/kernels/*.cu ./examples/transpose_example.cu -o ./build/matrix/transpose
-    echo "built transpose example"
+    echo "built ./build/matrix/transpose"
     nvcc ./matrix/*.cu ./matrix/kernels/*.cu ./examples/add_example.cu -o ./build/matrix/add
-    echo "built add example"
+    echo "built ./build/matrix/add"
     nvcc ./matrix/*.cu ./matrix/kernels/*.cu ./examples/dot_example.cu -o ./build/matrix/dot
-    echo "built dot example"
+    echo "built ./build/matrix/dot"
 }
 
 build_main () {
@@ -19,14 +19,18 @@ build_main () {
         mkdir ./build
     fi
     nvcc ./matrix/*.cu ./matrix/kernels/*.cu ./dann/*.cu ./main.cu -o ./build/main
-    echo "built main"
+    echo "built ./build/main"
 }
 
 if [[ $1 == "--examples" ]] || [[ $1 == "-e" ]];
 then 
     build_matrix_examples;
+elif [[ $1 == "--all" ]] || [[ $1 == "-a" ]];
+then
+    build_matrix_examples;
+    build_main; 
 else
-    build_main
+    build_main;
 fi
 
 

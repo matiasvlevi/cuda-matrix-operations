@@ -1,11 +1,5 @@
 #include <iostream>
 
-#ifdef __CUDACC__
-#define CUDA_CALLABLE_MEMBER __host__ __global__ __global__
-#else
-#define CUDA_CALLABLE_MEMBER
-#endif 
-
 #ifndef KERNEL_H
 #define KERNEL_H 
 namespace Kernel {
