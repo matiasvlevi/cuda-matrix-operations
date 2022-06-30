@@ -1,11 +1,11 @@
-#include "matrix.cuh"
+#include "../matrix.cuh"
 
 /**
 * transpose
 * 
 * transpose a matrix
 */
-__global__ void matrix::transpose(
+__global__ void Kernel::transpose(
     float *a,
     float *c,
     int R,

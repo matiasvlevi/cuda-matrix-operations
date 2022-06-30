@@ -1,4 +1,4 @@
-#include "matrix.cuh"
+#include "../matrix.cuh"
 
 /**
 * dot
@@ -6,7 +6,7 @@
 * A*B = C
 * dot product
 */
-__global__ void matrix::dot(
+__global__ void Kernel::dot(
     float *a,
     float *b,
     float *c,

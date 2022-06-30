@@ -6,13 +6,13 @@ int main() {
 	int M = 8; // matrix cols
 
 	float a[M*N];
-	matrix::init(a, M, N);
+	Matrix::initRandomi_static(a, M, N);
 
 	float b[M*N];
-	matrix::init(b, M, N);
+	Matrix::initRandomi_static(b, M, N);
 
 	float c[M*N];
-	matrix::init(c, M, N);
+	Matrix::initRandomi_static(c, M, N);
 
 	float *cudaA = 0;
 	float *cudaB = 0;
@@ -20,8 +20,8 @@ int main() {
 
 	std::cout << "Start" << std::endl;
 	
-	matrix::log(a, M, N, 'A');
-	matrix::log(b, M, N, 'B');
+	Matrix::log_static(a, M, N, 'A');
+	Matrix::log_static(b, M, N, 'B');
  	
 	cudaMalloc(&cudaA, sizeof(a));
  	cudaMalloc(&cudaB, sizeof(b));
@@ -41,7 +41,7 @@ int main() {
  	BLOCKS.x = blocks;
  	BLOCKS.y = blocks;
 	
-	matrix::add<<<BLOCKS, THREADS>>>(cudaA, cudaB, cudaC, N, M);
+	Kernel::add<<<BLOCKS, THREADS>>>(cudaA, cudaB, cudaC, N, M);
  
 	cudaMemcpy(c, cudaC, sizeof(c), cudaMemcpyDeviceToHost);
  	
@@ -49,7 +49,7 @@ int main() {
  	cudaFree(cudaB);
  	cudaFree(cudaC);
  
- 	matrix::log(c, M, N, 'C');
+ 	Matrix::log_static(c, M, N, 'C');
 
 	std::cout << "Finished" << std::endl;
 

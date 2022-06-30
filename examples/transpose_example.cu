@@ -1,23 +1,22 @@
 #include "../matrix/matrix.cuh"
 
-
 int main() {
 
 	int N = 8; // matrix cols
 	int M = 6; // matrix rows
 
 	float a[M*N];
-	matrix::init(a, N, M);
+	Matrix::initRandomi_static(a, N, M);
 
 	float c[N*M];
-	matrix::init(c, M, N);
+	Matrix::initRandomi_static(c, M, N);
 
 	float *cudaA = 0;
 	float *cudaC = 0;
 
 	std::cout << "Start" << std::endl;
 	
-	matrix::log(a, N, M, 'A');
+	Matrix::log_static(a, N, M, 'A');
  	
 	cudaMalloc(&cudaA, sizeof(a));
  	cudaMalloc(&cudaC, sizeof(c));
@@ -35,14 +34,14 @@ int main() {
  	BLOCKS.x = blocks;
  	BLOCKS.y = blocks;
 	
-	matrix::transpose<<<BLOCKS, THREADS>>>(cudaA, cudaC, N, M);
+	Kernel::transpose<<<BLOCKS, THREADS>>>(cudaA, cudaC, N, M);
  
 	cudaMemcpy(c, cudaC, sizeof(c), cudaMemcpyDeviceToHost);
  	
  	cudaFree(cudaA);
  	cudaFree(cudaC);
  
- 	matrix::log(c, M, N, 'C');
+ 	Matrix::log_static(c, M, N, 'C');
 
 	std::cout << "Finished" << std::endl;
 

@@ -5,12 +5,12 @@ void Dann::log() {
 
     // Log layers
     for (int i = 0; i < layers.size(); i++) {
-        matrix::log(layers[i]->values, layers[i]->size, 1);
+        Matrix::log_static(layers[i]->values, layers[i]->size, 1);
     }
 
     // Log weights
     for (int i = 0; i < weights.size(); i++) {
-        matrix::log(weights[i]->values, weights[i]->rows, weights[i]->cols);
+        weights[i]->log();
     }
 }
 

@@ -1,4 +1,4 @@
-#include "matrix.cuh"
+#include "../matrix.cuh"
 
 /**
 * add
@@ -6,7 +6,7 @@
 * Add 2 matrices with the same dimension
 *
 */
-__global__ void matrix::add(
+__global__ void Kernel::add(
     float *a,
     float *b,
     float *c,

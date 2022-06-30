@@ -1,35 +1,6 @@
 #include "vector"
 #include "../matrix/matrix.cuh"
-
-#ifdef __CUDACC__
-#define CUDA_CALLABLE_MEMBER __host__ __device__
-#else
-#define CUDA_CALLABLE_MEMBER
-#endif 
-
-
-struct Layer {
-    float* values;
-    int size;
-
-    Layer(float* layer_values, int layer_size) {
-        values = layer_values;
-        size = layer_size;
-    }
-};
-
-struct Matrix {
-    float* values;
-    int rows;
-    int cols;
-
-    Matrix(float* m_values, int m_rows, int m_cols) {
-        values = m_values;
-        rows = m_rows;
-        cols = m_cols;
-    }
-};
-
+#include "../layer/layer.hpp"
 
 #ifndef DANN_H
 #define DANN_H
@@ -52,7 +23,7 @@ public:
 
         // Create input layer
         float *input = (float*)malloc(sizeof(float) * input_size);
-        matrix::init(input, input_size, 1);
+        Matrix::init_static(input, input_size, 1);
         layers.push_back(new Layer(input, input_size));
     }
     ~Dann() {

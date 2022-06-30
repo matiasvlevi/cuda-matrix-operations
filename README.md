@@ -9,6 +9,11 @@ Cuda matrix operations
 ./build.sh
 ```
 
+#### Build examples (optional)
+
+```
+./build.sh --examples
+```
 
 ### Run
 

@@ -1,4 +1,4 @@
-#include "matrix.cuh"
+#include "../matrix.cuh"
 
 /**
 * sub
@@ -6,7 +6,7 @@
 * Subtract 2 matrices with the same dimension
 *
 */
-__global__ void matrix::sub(
+__global__ void Kernel::sub(
     float *a,
     float *b,
     float *c,
