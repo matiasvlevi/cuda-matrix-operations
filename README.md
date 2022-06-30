@@ -1,21 +1,21 @@
-# Dannjs + CUDA
+# CUDA Matrix operations
 
-Cuda matrix operations & Dannjs CUDA implementation
+Work in progress
 
 ### Build
 
 ```
-./build.sh
+make
 ```
 
 #### Build examples (optional)
 Matrix operation examples are provided
 ```
-./build.sh --examples
+make examples
 ```
 
 ### Run
 
 ```
-./build/main
+make run
 ```
