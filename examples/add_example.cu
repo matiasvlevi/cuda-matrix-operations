@@ -1,9 +1,9 @@
-#include "matrix/matrix.cuh"
+#include "../matrix/matrix.cuh"
 
 int main() {
 
-	int N = 4; // matrix rows
-	int M = 4; // matrix cols
+	int N = 8; // matrix rows
+	int M = 8; // matrix cols
 
 	float a[M*N];
 	matrix::init(a, M, N);
