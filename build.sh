@@ -15,7 +15,7 @@ build_examples () {
 }
 
 build_main () {
-    nvcc ./matrix/*.cu ./main.cu -o ./build/main
+    nvcc ./matrix/*.cu ./dann/*.cu ./main.cu -o ./build/main
     echo "built main"
 }
 

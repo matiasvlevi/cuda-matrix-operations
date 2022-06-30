@@ -66,52 +66,9 @@ public:
             free(weights[i]->values);
         }
     }
-    void logArch() {
-        char delim;
-        // Log Architecture
-        std::cout << "Architecture: {";
-
-        for (int i = 0; i < layers.size(); i++) {
-            delim = (i == 0) ? ' ' : ',';
-            std::cout << delim << layers[i]->size; 
-        }
-
-        std::cout << " }" << std::endl;
-    }
-    void log() {
-        this->logArch();
-
-        // Log layers
-        for (int i = 0; i < layers.size(); i++) {
-            matrix::log(layers[i]->values, layers[i]->size, 1);
-        }
-
-        // Log weights
-        for (int i = 0; i < weights.size(); i++) {
-            matrix::log(weights[i]->values, weights[i]->rows, weights[i]->cols);
-        }
-    }
-    void addHiddenLayer(int layer_size) {
-        // Create hidden layer
-        float *layer = (float*)malloc(sizeof(float) * layer_size);
-        matrix::init(layer, layer_size, 1);
-
-        layers.push_back(new Layer(layer, layer_size));
-    }
-    void makeWeights() {
-
-        // Create output layer
-        float *output = (float*)malloc(sizeof(float) * input_size);
-        matrix::init(output, output_size, 1);
-        layers.push_back(new Layer(output, output_size));
-
-        // Weights
-        for (int i = 1; i < layers.size(); i++) {
-            float *hidden_w = (float*)malloc(sizeof(float) * layers[i]->size * layers[i-1]->size);
-            matrix::initRandom(hidden_w, layers[i]->size, layers[i-1]->size);
-            weights.push_back(new Matrix(hidden_w, layers[i]->size, layers[i-1]->size));
-        }
-
-    }
+    void logArch();
+    void log();
+    void addHiddenLayer(int layer_size);
+    void makeWeights();
 };
 #endif
