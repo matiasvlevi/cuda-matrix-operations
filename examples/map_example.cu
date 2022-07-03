@@ -9,7 +9,7 @@ int main() {
 	Matrix::initRandomi_static(a, M, N);
 
 	float c[M*N];
-	Matrix::initRandomi_static(c, M, N);
+	Matrix::init_static(c, M, N);
 
 	Matrix::log_static(a, M, N, 'A');
 	Matrix::log_static(c, M, N, 'C');
@@ -35,7 +35,7 @@ int main() {
 	
 	std::cout << "Start" << std::endl;
 	
-	Kernel::map<<<BLOCKS, THREADS>>>(cudaA, cudaC, N, &Activation::sigmoid);
+	Kernel::map<<<BLOCKS, THREADS>>>(cudaA, cudaC, M, N, &Activation::sigmoid);
  
 	cudaMemcpy(c, cudaC, sizeof(c), cudaMemcpyDeviceToHost);
  	

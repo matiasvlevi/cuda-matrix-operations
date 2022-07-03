@@ -16,8 +16,8 @@ struct ActFunc {
 #ifndef ACTIVATION_H
 #define ACTIVATION_H
 namespace Activation {
-	float linear(float x);
-	float sigmoid(float x);
+	__device__ float linear(float x);
+	__device__ float sigmoid(float x);
 	
 	namespace Derivative {
 		float linear_d(float x); 
