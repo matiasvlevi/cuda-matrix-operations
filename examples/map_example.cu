@@ -1,5 +1,7 @@
 #include "../src/matrix/matrix.cuh"
 
+__device__ mathFunc p_sigmoid = Activation::sigmoid;
+
 int main() {
 
 	int N = 6; // A matrix columns
@@ -22,7 +24,12 @@ int main() {
  
  	cudaMemcpy(cudaA, a, sizeof(a), cudaMemcpyHostToDevice);
  	cudaMemcpy(cudaC, c, sizeof(c), cudaMemcpyHostToDevice);
- 
+	
+	mathFunc h_pointFunc;
+
+	cudaError_t err = cudaMemcpyFromSymbol(&h_pointFunc, p_sigmoid, sizeof(mathFunc));
+	
+
  	dim3 THREADS;
  	THREADS.x = 16;
  	THREADS.y = 16;
@@ -35,13 +42,15 @@ int main() {
 	
 	std::cout << "Start" << std::endl;
 	
-	Kernel::map<<<BLOCKS, THREADS>>>(cudaA, cudaC, M, N, &Activation::sigmoid);
- 
+	Kernel::map<<<BLOCKS, THREADS>>>(cudaA, cudaC, M, N, h_pointFunc);
+	
 	cudaMemcpy(c, cudaC, sizeof(c), cudaMemcpyDeviceToHost);
  	
  	cudaFree(cudaA);
  	cudaFree(cudaC);
- 
+//	cudaFree(h_pointFunc);
+
+
  	Matrix::log_static(c, M, N, 'C');
 
 	std::cout << "Finished" << std::endl;

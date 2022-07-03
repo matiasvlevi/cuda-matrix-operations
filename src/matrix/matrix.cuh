@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 
+using func_t = float (*) (float);
+
 #ifndef KERNEL_H
 #define KERNEL_H 
 namespace Kernel {

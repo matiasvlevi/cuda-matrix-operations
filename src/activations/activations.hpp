@@ -16,13 +16,13 @@ struct ActFunc {
 #ifndef ACTIVATION_H
 #define ACTIVATION_H
 namespace Activation {
-	__device__ float linear(float x);
-	__device__ float sigmoid(float x);
-	
+	__host__ __device__ float linear(float x);
+	__host__ __device__ float sigmoid(float x);
+
 	namespace Derivative {
-		float linear_d(float x); 
-		float sigmoid_d(float x);
+		__host__ __device__ float linear_d(float x); 
+		__host__ __device__ float sigmoid_d(float x);
 	}
 }
 #endif
-
+ 

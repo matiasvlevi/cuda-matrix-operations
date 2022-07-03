@@ -6,7 +6,7 @@ void Kernel::map(
 	float *c,
 	int N,
 	int M,
-	mathFunc operation
+	mathFunc op
 ) {
 	
 	int row = blockIdx.y * blockDim.y + threadIdx.y;
@@ -15,6 +15,6 @@ void Kernel::map(
 	// Abort if out of range
 	if (row >= N || col >= M) return;
 
-	c[row * M + col] = Activation::sigmoid(a[row * M + col]); 
+	c[row * M + col] = (*op)(a[row * M + col]); 
 
 }	
