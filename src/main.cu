@@ -9,7 +9,7 @@ int main() {
 	
 	nn->registerDeviceMem();
 
-    float input[2] = {1, 1};
+	float input[2] = {1, 1};
 	std::vector<float> out = nn->feedForward(input);
 
 	Matrix::logVector(out);

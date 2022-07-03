@@ -46,9 +46,10 @@ void Matrix::log(char name) {
 
 void Matrix::logVector(std::vector<float> input) {
     std::cout << "Vector [\n";
-    
-    for (int i = 0; i < input.size(); i++) 
-        std::cout << "\t" << input[i] << ",\n";
-    
+    char delim = ',';
+    for (int i = 0; i < input.size(); i++) {
+		delim = (i == input.size()-1) ? ' ' : ',';
+        std::cout << "\t" << input[i] << delim << "\n";
+	}
     std::cout << "]" << std::endl;
 }

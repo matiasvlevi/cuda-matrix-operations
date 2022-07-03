@@ -1,7 +1,11 @@
 #include "dann.hpp"
 
 std::vector<float> Dann::feedForward(float *input) {
-	
+	if (unsafe) {
+		std::vector<float> output;
+		return output;
+	};
+
 	layers[0]->values = input;
 
     cudaMemcpy(

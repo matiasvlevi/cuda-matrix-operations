@@ -4,7 +4,7 @@
 #ifndef DANN_H
 #define DANN_H
 class Dann {
-public: 
+private: 
 	int input_size;
     int output_size;
 
@@ -15,11 +15,16 @@ public:
     std::vector<Layer*> layers;
     std::vector<Matrix*> weights;
 
-    dim3 THREADS;
+	std::vector<mathFunc> activations;
+    
+	dim3 THREADS;
     dim3 BLOCKS;
 
+	bool unsafe;
+public:
     Dann(int nn_input_size, int nn_output_size) {
-        input_size = nn_input_size;
+        unsafe = false;
+		input_size = nn_input_size;
         output_size = nn_output_size;
 
         THREADS.x = 16;
@@ -27,9 +32,12 @@ public:
 
         // Create input layer
         float *input = (float*)malloc(sizeof(float) * input_size);
-        Matrix::init_static(input, input_size, 1);
-        layers.push_back(new Layer(input, input_size));
-    }
+		if (heapOutOfMem(input)) return; 
+		Matrix::init_static(input, input_size, 1);
+		layers.push_back(new Layer(input, input_size));
+
+
+	}
     ~Dann() {
         // Free layers
         for (int i = 0; i < layers.size(); i++) {
@@ -50,8 +58,10 @@ public:
     void registerDeviceMem();
     void getDeviceMem();
 
+	bool heapOutOfMem(float* values);
+
     // Dannjs Classic methods
-    void addHiddenLayer(int layer_size);
+    void addHiddenLayer(int layer_size, mathFunc act = Activation::sigmoid);
     void makeWeights();
 
     std::vector<float> feedForward(float *input_values);

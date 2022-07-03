@@ -15,7 +15,7 @@ __global__ void Kernel::dot(
     int P
 ) {
 
-    int row = blockIdx.y * blockDim.y + threadIdx.y;
+	int row = blockIdx.y * blockDim.y + threadIdx.y;
     int col = blockIdx.x * blockDim.x + threadIdx.x;	
 
     // Abort if out of range

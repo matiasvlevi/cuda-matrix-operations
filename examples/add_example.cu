@@ -1,4 +1,4 @@
-#include "../matrix/matrix.cuh"
+#include "../src/matrix/matrix.cuh"
 
 int main() {
 

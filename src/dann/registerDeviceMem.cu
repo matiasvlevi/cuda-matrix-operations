@@ -1,13 +1,12 @@
 #include "dann.hpp"
 
 void Dann::registerDeviceMem() {
+	if (unsafe) return;
+
 	// Register layer values
 	for (int i = 0; i < layers.size(); i++) {
-		cudaMalloc(&(layers[i]->cuda_values), layers[i]->bsize);
-    
-		std::cout << "layer "<< i << " size: " << layers[i]->bsize << std::endl;
+		cudaMalloc(&(layers[i]->cuda_values), layers[i]->bsize);    
 	}
-
 
     // Register weight values
 	for (int i = 0; i < weights.size(); i++) {
@@ -18,8 +17,6 @@ void Dann::registerDeviceMem() {
             weights[i]->values,
             weights[i]->bsize,
             cudaMemcpyHostToDevice
-        );
-		
-		std::cout << "weight "<< i << " size: " << weights[i]->bsize << std::endl;
+        );	
 	}
 }

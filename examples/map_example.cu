@@ -2,22 +2,21 @@
 
 int main() {
 
-	int N = 8; // matrix cols
-	int M = 6; // matrix rows
+	int N = 6; // A matrix columns
+	int M = 6; // A matrix rows
 
 	float a[M*N];
-	Matrix::initRandomi_static(a, N, M);
+	Matrix::initRandomi_static(a, M, N);
 
-	float c[N*M];
+	float c[M*N];
 	Matrix::initRandomi_static(c, M, N);
+
+	Matrix::log_static(a, M, N, 'A');
+	Matrix::log_static(c, M, N, 'C');
 
 	float *cudaA = 0;
 	float *cudaC = 0;
 
-	std::cout << "Start" << std::endl;
-	
-	Matrix::log_static(a, N, M, 'A');
- 	
 	cudaMalloc(&cudaA, sizeof(a));
  	cudaMalloc(&cudaC, sizeof(c));
  
@@ -34,7 +33,9 @@ int main() {
  	BLOCKS.x = blocks;
  	BLOCKS.y = blocks;
 	
-	Kernel::transpose<<<BLOCKS, THREADS>>>(cudaA, cudaC, N, M);
+	std::cout << "Start" << std::endl;
+	
+	Kernel::map<<<BLOCKS, THREADS>>>(cudaA, cudaC, N, &Activation::sigmoid);
  
 	cudaMemcpy(c, cudaC, sizeof(c), cudaMemcpyDeviceToHost);
  	

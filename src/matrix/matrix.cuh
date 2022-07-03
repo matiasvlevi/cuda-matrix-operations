@@ -1,3 +1,5 @@
+#include "../activations/activations.hpp"
+
 #include <iostream>
 #include <vector>
 
@@ -9,6 +11,7 @@ namespace Kernel {
     __global__ void add(float *a, float *b, float *c, int R, int C);
     __global__ void sub(float *a, float *b, float *c, int R, int C);
     __global__ void transpose(float *a, float *c, int R, int C);
+    __global__ void map(float *a, float *c, int C, mathFunc operation);
 }
 #endif
 
