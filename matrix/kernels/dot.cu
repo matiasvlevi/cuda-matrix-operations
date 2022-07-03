@@ -23,7 +23,7 @@ __global__ void Kernel::dot(
 
     // Vector dot product
     float sum = 0;
-    for (int k = 0; k < P; k++) {
+    for (int k = 0; k < N; k++) {
         sum += a[row * N + k] * b[k * P + col];
     }
     c[row * P + col] = sum;

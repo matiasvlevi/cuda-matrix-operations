@@ -2,7 +2,7 @@
 COMPILER=nvcc
 
 INC=matrix/*.cu matrix/kernels/*.cu dann/*.cu
-
+HEADERS=matrix/*.cuh dann/*.hpp layer/*.hpp
 MAIN=main.cu
 
 OUTDIR=build
@@ -12,7 +12,7 @@ DOT_EXAMPLE=examples/dot_example.cu
 ADD_EXAMPLE=examples/add_example.cu
 TRANSPOSE_EXAMPLE=examples/transpose_example.cu
 
-build: $(INC) $(MAIN)
+build: $(INC) $(MAIN) $(HEADERS)
 	mkdir -p $(OUTDIR)/$(OUTDIR_EXAMPLES)
 	$(COMPILER) $(INC) $(MAIN) -o $(OUTDIR)/main 
 

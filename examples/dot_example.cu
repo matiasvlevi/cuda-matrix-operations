@@ -2,9 +2,9 @@
 
 int main() {
 
-	int N = 3; // A matrix columns and B matrix rows
-	int M = 2; // A matrix rows
-	int P = 4; // B matrix columns
+	int N = 2; // A matrix columns and B matrix rows
+	int M = 3; // A matrix rows
+	int P = 1; // B matrix columns
 
 	float a[M*N];
 	Matrix::initRandomi_static(a, M, N);
@@ -15,15 +15,13 @@ int main() {
 	float c[P*M];
 	Matrix::initRandomi_static(c, M, P);
 
+	Matrix::log_static(a, M, N, 'A');
+	Matrix::log_static(b, N, P, 'B');
+
 	float *cudaA = 0;
 	float *cudaB = 0;
 	float *cudaC = 0;
 
-	std::cout << "Start" << std::endl;
-	
-	Matrix::log_static(a, M, N, 'A');
-	Matrix::log_static(b, N, P, 'B');
- 	
 	cudaMalloc(&cudaA, sizeof(a));
  	cudaMalloc(&cudaB, sizeof(b));
  	cudaMalloc(&cudaC, sizeof(c));
@@ -41,6 +39,8 @@ int main() {
  	dim3 BLOCKS;
  	BLOCKS.x = blocks;
  	BLOCKS.y = blocks;
+	
+	std::cout << "Start" << std::endl;
 	
 	Kernel::dot<<<BLOCKS, THREADS>>>(cudaA, cudaB, cudaC, N, M, P);
  

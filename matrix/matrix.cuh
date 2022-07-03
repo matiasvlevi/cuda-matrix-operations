@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #ifndef KERNEL_H
 #define KERNEL_H 
@@ -16,14 +17,18 @@ namespace Kernel {
 class Matrix {
 public:
     float* values;
+    float* cuda_values;
     int rows;
     int cols;
+	std::size_t bsize;
 
     Matrix(float* m_values, int m_rows, int m_cols) {
-        values = m_values;
+		cuda_values = 0;
+		values = m_values;
         rows = m_rows;
         cols = m_cols;
-    }
+		bsize = sizeof(float) * m_rows * m_cols;
+	}
 
     // Utility functions
     void init();
@@ -35,6 +40,7 @@ public:
     static void initRandomf_static(float* m, int R, int C);
     
     static void log_static(float* m, int R, int C, char name = 'M');
+    static void logVector(std::vector<float> input);
     void log(char name = 'M');
 };
 #endif
