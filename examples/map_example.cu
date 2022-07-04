@@ -1,9 +1,6 @@
 #include "../src/matrix/matrix.cuh"
 
-__device__ mathFunc p_sigmoid = Activation::sigmoid;
-
 int main() {
-
 	int N = 6; // A matrix columns
 	int M = 6; // A matrix rows
 
@@ -27,9 +24,8 @@ int main() {
 	
 	mathFunc h_pointFunc;
 
-	cudaError_t err = cudaMemcpyFromSymbol(&h_pointFunc, p_sigmoid, sizeof(mathFunc));
+	cudaError_t err = cudaMemcpyFromSymbol(&h_pointFunc, Activation::sigmoid, sizeof(mathFunc));
 	
-
  	dim3 THREADS;
  	THREADS.x = 16;
  	THREADS.y = 16;
@@ -48,8 +44,6 @@ int main() {
  	
  	cudaFree(cudaA);
  	cudaFree(cudaC);
-//	cudaFree(h_pointFunc);
-
 
  	Matrix::log_static(c, M, N, 'C');
 

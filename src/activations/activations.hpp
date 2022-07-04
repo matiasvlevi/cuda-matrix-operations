@@ -13,16 +13,29 @@ struct ActFunc {
 }
 #endif
 
-#ifndef ACTIVATION_H
-#define ACTIVATION_H
-namespace Activation {
+#ifndef ACTPOINTER_H
+#define ACTPOINTER_H
+namespace ActPointer {
 	__host__ __device__ float linear(float x);
-	__host__ __device__ float sigmoid(float x);
+	__host__ __device__ float sigmoid(float x);	
 
 	namespace Derivative {
-		__host__ __device__ float linear_d(float x); 
-		__host__ __device__ float sigmoid_d(float x);
+		__host__ __device__ float linear(float x); 
+		__host__ __device__ float sigmoid(float x);
 	}
 }
 #endif
- 
+
+#ifndef ACTIVATION_H
+#define ACTIVATION_H
+namespace Activation {
+	extern __device__ mathFunc sigmoid;
+	extern __device__ mathFunc linear;
+
+	namespace Derivative {
+		extern __device__ mathFunc sigmoid;
+		extern __device__ mathFunc linear;
+	}
+}
+#endif
+

@@ -1,6 +1,6 @@
 #include "activations.hpp"
 
-namespace Activation {
+namespace ActPointer {
 	__host__ __device__
 	float linear(float x) {
 		return x;
@@ -13,15 +13,19 @@ namespace Activation {
 
 	namespace Derivative {
 		__host__ __device__
-		float linear_d(float x) {
+		float linear(float x) {
 			return 1;
 		}
 	
 		__host__ __device__
-		float sigmoid_d(float x) {
+		float sigmoid(float x) {
 			float x1 = 1 / (1 + exp(-x));
 			return x1 * (1 - x1);
 		}
 	}
-}
+};
 
+__device__ mathFunc Activation::sigmoid = ActPointer::sigmoid;
+__device__ mathFunc Activation::linear = ActPointer::linear;
+__device__ mathFunc Activation::Derivative::sigmoid = ActPointer::Derivative::sigmoid;
+__device__ mathFunc Activation::Derivative::linear = ActPointer::Derivative::linear;
