@@ -17,7 +17,7 @@ Here is a simple neural network performing a feed forward in the GPU
 
 int main() {
 	
-	Dann *nn = new Dann(2, 4);
+	Dann *nn = new Dann(2, 2);
 
 	nn->addHiddenLayer(8, &Activation::sigmoid);
 	nn->addHiddenLayer(8, &Activation::sigmoid);
@@ -35,6 +35,23 @@ int main() {
 	
 	return 0;
 }
+```
+
+Here is the equivalent using Dannjs
+
+```js
+const nn = new Dann(2, 2);
+
+nn.addHiddenLayer(8, 'sigmoid');
+nn.addHiddenLayer(8, 'sigmoid');
+
+nn.outputActivation('sigmoid');
+nn.makeWeights();
+nn.log();
+
+let out = nn.feedForward([1, 1]);
+
+console.log(out);
 ```
 
 
