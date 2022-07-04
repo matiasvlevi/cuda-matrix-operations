@@ -31,9 +31,9 @@ void Matrix::init() {
 * initiate a  with R,C dimensions
 *
 */
-void Matrix::initRandomi_static(float* m, int R, int C) {
+void Matrix::initRandomi_static(float* m, int R, int C, int min, int max) {
     for (int i = 0; i < R*C; i++) {
-        m[i] = rand() % 10;		
+        m[i] = (rand() % (max - min)) + min;		
     }
 }
 
@@ -43,9 +43,9 @@ void Matrix::initRandomi_static(float* m, int R, int C) {
 * initiate a  with R,C dimensions
 *
 */
-void Matrix::initRandomi() {
+void Matrix::initRandomi(int min, int max) {
     for (int i = 0; i < rows*cols; i++) {
-        values[i] = rand() % 10;		
+        values[i] = (rand() % (max - min)) + min;		
     }
 }
 
@@ -57,7 +57,7 @@ void Matrix::initRandomi() {
 */
 void Matrix::initRandomf_static(float* m, int R, int C) {
     for (int i = 0; i < R*C; i++) {
-        m[i] = (float)(rand() % (1 << 10))/(1 << 10);		
+        m[i] = (float)((rand() % (1 << 11)))/(1 << 10) - 1;		
     }
 }
 
@@ -69,6 +69,6 @@ void Matrix::initRandomf_static(float* m, int R, int C) {
 */
 void Matrix::initRandomf() {
     for (int i = 0; i < rows*cols; i++) {
-        values[i] = (float)(rand() % (1 << 10))/(1 << 10);		
+        values[i] = (float)(rand() % (1 << 11))/(1 << 10) - 1;		
     }
 }

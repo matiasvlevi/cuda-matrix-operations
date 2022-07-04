@@ -35,11 +35,11 @@ public:
 
     // Utility functions
     void init();
-    void initRandomi();
+    void initRandomi(int min = 0, int max = 10);
     void initRandomf();
 
     static void init_static(float* m, int R, int C);
-    static void initRandomi_static(float* m, int R, int C);
+    static void initRandomi_static(float* m, int R, int C, int min = 0, int max = 10);
     static void initRandomf_static(float* m, int R, int C);
     
     static void log_static(float* m, int R, int C, char name = 'M');

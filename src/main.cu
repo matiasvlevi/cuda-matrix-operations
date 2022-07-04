@@ -7,7 +7,7 @@ int main() {
 	nn->addHiddenLayer(8, &Activation::sigmoid);
 	nn->addHiddenLayer(8, &Activation::sigmoid);
 
-	nn->outputActivation(&Activation::linear);
+	nn->outputActivation(&Activation::sigmoid);
 	nn->makeWeights();
 	nn->log();
 
