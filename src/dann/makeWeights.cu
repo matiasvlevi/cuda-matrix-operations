@@ -3,12 +3,20 @@
 void Dann::makeWeights() {
 
     // Create output layer
-    float *output = (float*)malloc(sizeof(float) * input_size);
+    float *output = (float*)malloc(sizeof(float) * output_size);
 	if (heapOutOfMem(output)) return;
 
 	Matrix::init_static(output, output_size, 1);
     layers.push_back(new Layer(output, output_size));
 
+	// Create a bias layer
+    float *bias_layer = (float*)malloc(sizeof(float) * output_size);
+	if (heapOutOfMem(bias_layer)) return;
+
+	Matrix::init_static(bias_layer, output_size, 1);
+    biases.push_back(new Layer(bias_layer, output_size));
+
+	// Initiate Device's pointer to the activation function
 	mathFunc h_pointFunc;
 	cudaMemcpyFromSymbol(&h_pointFunc, Activation::sigmoid, sizeof(mathFunc));	
 	activations.push_back(h_pointFunc);

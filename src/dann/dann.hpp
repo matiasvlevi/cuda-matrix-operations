@@ -35,17 +35,21 @@ public:
         // Create input layer
         float *input = (float*)malloc(sizeof(float) * input_size);
 		if (heapOutOfMem(input)) return; 
+
 		Matrix::init_static(input, input_size, 1);
 		layers.push_back(new Layer(input, input_size));
-
-
 	}
     ~Dann() {
         // Free layers
         for (int i = 0; i < layers.size(); i++) {
             free(layers[i]->values); 
-            cudaFree(layers[i]->cuda_values);
+			cudaFree(layers[i]->cuda_values);
         }
+
+		for (int i = 0; i < biases.size(); i++) {
+			free(biases[i]->values);
+			cudaFree(biases[i]->cuda_values);
+		}
 
         // Free weights
         for (int i = 0; i < weights.size(); i++) {
