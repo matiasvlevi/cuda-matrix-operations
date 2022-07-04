@@ -12,11 +12,13 @@ private:
 
     std::vector<int> layer_def;
 
+	std::vector<Layer*> biases;
     std::vector<Layer*> layers;
     std::vector<Matrix*> weights;
 
-	std::vector<mathFunc> activations;
-    
+    std::vector<mathFunc> activations;
+	std::vector<mathFunc> derivatives;
+	
 	dim3 THREADS;
     dim3 BLOCKS;
 
@@ -61,7 +63,8 @@ public:
 	bool heapOutOfMem(float* values);
 
     // Dannjs Classic methods
-    void addHiddenLayer(int layer_size, mathFunc act = Activation::sigmoid);
+	void outputActivation(mathFunc *act);
+    void addHiddenLayer(int layer_size, mathFunc *act = &Activation::sigmoid);
     void makeWeights();
 
     std::vector<float> feedForward(float *input_values);

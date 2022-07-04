@@ -10,6 +10,12 @@ typedef float(*mathFunc)(float);
 struct ActFunc {
 	mathFunc activation;
 	mathFunc derivative;
+	ActFunc(mathFunc act, mathFunc der) {
+		//cudaMemcpyFromSymbol(&derivative, der, sizeof(mathFunc));
+		//cudaMemcpyFromSymbol(&activation, act, sizeof(mathFunc));
+		activation = act;
+		derivative = der;
+	}
 }
 #endif
 

@@ -9,6 +9,10 @@ void Dann::makeWeights() {
 	Matrix::init_static(output, output_size, 1);
     layers.push_back(new Layer(output, output_size));
 
+	mathFunc h_pointFunc;
+	cudaMemcpyFromSymbol(&h_pointFunc, Activation::sigmoid, sizeof(mathFunc));	
+	activations.push_back(h_pointFunc);
+
     // Weights
     for (int i = 1; i < layers.size(); i++) {
         float *hidden_w = (float*)malloc(sizeof(float) * layers[i]->size * layers[i-1]->size);

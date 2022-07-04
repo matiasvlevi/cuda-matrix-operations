@@ -32,6 +32,20 @@ std::vector<float> Dann::feedForward(float *input) {
 			weights[i]->rows,
 			1
 		);
+//		mathFunc h_point;
+//		cudaMemcpyFromSymbol(&h_point, , sizeof(mathFunc));
+
+		float *temp = 0;
+		cudaMalloc(&temp, layers[i+1]->bsize);
+		Kernel::map<<<BLOCKS, THREADS>>>(
+			layers[i+1]->cuda_values,
+			temp,
+			layers[i+1]->size,
+			1,
+			activations[i]
+		);
+		cudaMemcpy(layers[i+1]->cuda_values, temp, layers[i+1]->bsize, cudaMemcpyDeviceToDevice);
+		cudaFree(temp);
 	}
 
     cudaMemcpy(
