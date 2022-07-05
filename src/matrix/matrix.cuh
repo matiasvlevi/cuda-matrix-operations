@@ -36,11 +36,11 @@ public:
     // Utility functions
     void init();
     void initRandomi(int min = 0, int max = 10);
-    void initRandomf();
+    void initRandomf(float min = -1, float max = 1);
 
     static void init_static(float* m, int R, int C);
     static void initRandomi_static(float* m, int R, int C, int min = 0, int max = 10);
-    static void initRandomf_static(float* m, int R, int C);
+    static void initRandomf_static(float* m, int R, int C, float min = -1, float max = 1);
     
     static void log_static(float* m, int R, int C, char name = 'M');
     static void logVector(std::vector<float> input);

@@ -23,6 +23,8 @@ private:
     dim3 BLOCKS;
 
 	bool unsafe;
+
+	float *tempBuffer;
 public:
     Dann(int nn_input_size, int nn_output_size) {
         unsafe = false;
@@ -56,7 +58,8 @@ public:
             free(weights[i]->values);
             cudaFree(weights[i]->cuda_values);
         }
-    }
+		cudaFree(tempBuffer);
+	}
     void logArch();
     void log();
 
@@ -65,6 +68,8 @@ public:
     void getDeviceMem();
 
 	bool heapOutOfMem(float* values);
+
+	static float largestSize(std::vector<Layer*> layers);
 
     // Dannjs Classic methods
 	void outputActivation(mathFunc *act);

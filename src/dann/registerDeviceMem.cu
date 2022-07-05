@@ -3,6 +3,8 @@
 void Dann::registerDeviceMem() {
 	if (unsafe) return;
 
+	cudaMalloc(&(tempBuffer), Dann::largestSize(layers)); 
+
 	// Register layer values
 	for (int i = 0; i < layers.size(); i++) {
 		cudaMalloc(&(layers[i]->cuda_values), layers[i]->bsize);    
